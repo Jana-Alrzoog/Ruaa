@@ -140,6 +140,12 @@ UX</textarea
           </form>
         </div>
       </div>
+      
+      <section class="profile-card">
+    <h2>My Team Members</h2>
+     <div id="team-members" class="team-members-container"></div>
+</section>
+
 
       <!-- Registered Events Modal -->
       <div id="events-modal" class="modal">
@@ -184,6 +190,44 @@ UX</textarea
     </div>
 
     <script>
+        
+    class ProfileManager {
+            constructor() {
+                this.teamContainer = document.getElementById("team-members");
+                this.teamMembers = JSON.parse(localStorage.getItem("profileTeamMembers")) || [];
+                this.renderTeamMembers();
+            }
+
+            renderTeamMembers() {
+                this.teamContainer.innerHTML = "";
+
+                if (this.teamMembers.length === 0) {
+                    this.teamContainer.innerHTML = "<p style='color: white; text-align: center;'>No team members yet.</p>";
+                    return;
+                }
+
+                this.teamMembers.forEach((member, index) => {
+                    const memberCard = document.createElement("div");
+                    memberCard.classList.add("team-member-card");
+
+                    memberCard.innerHTML = `
+                        <div class="team-member-avatar"></div>
+                        <div class="team-member-info">
+                            <p class="team-member-name">${member.name}</p>
+                            <p class="team-member-email">${member.email}</p>
+                        </div>
+                    `;
+
+                    this.teamContainer.appendChild(memberCard);
+                });
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            new ProfileManager();
+        });
+
+
       // DOM Elements
       const editBtn = document.getElementById("edit-btn");
       const eventsBtn = document.getElementById("events-btn");
@@ -270,6 +314,67 @@ UX</textarea
           reader.readAsDataURL(e.target.files[0]);
         }
       });
+     document.addEventListener("DOMContentLoaded", function () {
+    const teamContainer = document.getElementById("team-members");
+function renderTeamMembers() {
+    let teamMembers = JSON.parse(localStorage.getItem("profileTeamMembers")) || [];
+    const teamContainer = document.getElementById("team-members");
+    teamContainer.innerHTML = "";
+
+    if (teamMembers.length === 0) {
+        teamContainer.innerHTML = "<p style='color: white; text-align: center;'>No team members yet.</p>";
+        return;
+    }
+
+    teamMembers.forEach((member, index) => {
+        const memberCard = document.createElement("div");
+        memberCard.classList.add("team-member-card");
+
+        memberCard.innerHTML = `
+            <div class="team-member-avatar"></div>
+            <div class="team-member-info">
+                <p class="team-member-name">${member.name}</p>
+                <p class="team-member-email">${member.email}</p>
+                <button class="delete-member-btn" data-index="${index}">Remove</button>
+            </div>
+        `;
+
+        teamContainer.appendChild(memberCard);
+    });
+
+    
+    document.querySelectorAll(".delete-member-btn").forEach((button) => {
+        button.addEventListener("click", function () {
+            const index = this.getAttribute("data-index");
+            removeTeamMember(index);
+        });
+    });
+}
+
+
+    
+
+    renderTeamMembers();
+});
+function removeTeamMember(index) {
+    let teamMembers = JSON.parse(localStorage.getItem("profileTeamMembers")) || [];
+
+   
+    const confirmDelete = confirm(`Are you sure you want to remove ${teamMembers[index].name}?`);
+    
+    if (confirmDelete) {
+        teamMembers.splice(index, 1); 
+        localStorage.setItem("profileTeamMembers", JSON.stringify(teamMembers)); 
+        renderTeamMembers(); 
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    renderTeamMembers();
+});
+
+
+
     </script>
   </body>
 </html>
