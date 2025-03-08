@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.min.css">
+    <link rel="stylesheet" href="profile.css">
+    <title>Ruaa</title>
+</head>
+
+<body>
+    <div class = "container">
+    <nav>
+        <div class="nav-logo">
+            <a href="#">
+                <img src="images/logo_ruaa.png" alt="Ruaa Logo">
+            </a>
+        </div>
+
+        <ul class="nav-links">
+            <li class="link"><a href="Home page.html">Home</a></li>
+            <li id="link1" class="link"><a href="#">Events</a></li>
+            <li id="link2" class="link"><a href="#">Workshops</a></li>
+            <li id="link2" class="link"><a href="#">Hackathons</a></li>
+            <li id="link3" class="link"><a href="#">About</a></li>
+            <li id="link4" class="link"><a href="profile.html">Profile</a></li>
+
+        </ul>
+    </nav>
+
+      <main class="main-content">
+        <section class="profile-card">
+          <div class="form-group">
+            <label class="field-label">UserName:</label>
+            <p id="username-display" class="input-field">user1234</p>
+          </div>
+          <div class="form-group">
+            <label class="field-label">Email:</label>
+            <p id="email-display" class="input-field">user@example.com</p>
+          </div>
+          <div class="form-group">
+            <label class="field-label">Experiences:</label>
+            <p id="experiences-display" class="input-field">
+              <span>programming</span>
+              <br />
+              <span>UX</span>
+            </p>
+          </div>
+          <div class="profile-circle" aria-label="Profile picture">
+            <div class="profile-image-container">
+              <img
+                id="profile-image"
+                src="https://via.placeholder.com/150"
+                alt="Profile picture"
+                class="hidden"
+              />
+              <div id="upload-icon" class="upload-icon">
+                <svg
+                  width="40"
+                  height="40"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 16L12 8"
+                    stroke="white"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    d="M9 11L12 8 15 11"
+                    stroke="white"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M8 16H16"
+                    stroke="white"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                <span>Upload Photo</span>
+              </div>
+            </div>
+            <input
+              type="file"
+              id="image-upload"
+              accept="image/*"
+              class="hidden"
+            />
+          </div>
+        </section>
+
+        <div class="action-buttons">
+          <button id="events-btn" class="action-btn">
+            My Registered Events
+          </button>
+          <button id="edit-btn" class="action-btn">Edit Profile</button>
+        </div>
+
+        
+      </main>
+
+      <!-- Edit Profile Modal -->
+      <div id="edit-modal" class="modal">
+        <div class="modal-content">
+          <span class="close-btn">&times;</span>
+          <h2>Edit Profile</h2>
+          <form id="edit-profile-form">
+            <div class="form-field">
+              <label for="username">Username:</label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                value="user1234"
+              />
+            </div>
+            <div class="form-field">
+              <label for="email">Email:</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value="user@example.com"
+              />
+            </div>
+            <div class="form-field">
+              <label for="experiences">Experiences:</label>
+              <textarea id="experiences" name="experiences">
+programming
+UX</textarea
+              >
+            </div>
+            <button type="submit" class="submit-btn">Save Changes</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Registered Events Modal -->
+      <div id="events-modal" class="modal">
+        <div class="modal-content">
+          <span class="close-btn">&times;</span>
+          <h2>My Registered Events</h2>
+          <div class="events-list">
+            <div class="event-card">
+              <h3>Web Development Workshop</h3>
+              <p class="event-date">June 15, 2024</p>
+              <p class="event-description">
+                Learn the fundamentals of web development with HTML, CSS, and
+                JavaScript.
+              </p>
+              <span class="event-status">Confirmed</span>
+            </div>
+            <div class="event-card">
+              <h3>UX Design Hackathon</h3>
+              <p class="event-date">July 10-12, 2024</p>
+              <p class="event-description">
+                A 48-hour hackathon focused on creating innovative user
+                experiences.
+              </p>
+              <span class="event-status">Pending</span>
+            </div>
+            <div class="event-card">
+              <h3>AI Conference</h3>
+              <p class="event-date">August 5, 2024</p>
+              <p class="event-description">
+                Explore the latest advancements in artificial intelligence and
+                machine learning.
+              </p>
+              <span class="event-status">Confirmed</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="copyright">
+        Copyright © 2024 Ruaa. All Rights Reserved.
+      </footer>
+    </div>
+
+    <script>
+      // DOM Elements
+      const editBtn = document.getElementById("edit-btn");
+      const eventsBtn = document.getElementById("events-btn");
+      const editModal = document.getElementById("edit-modal");
+      const eventsModal = document.getElementById("events-modal");
+      const closeBtns = document.querySelectorAll(".close-btn");
+      const editForm = document.getElementById("edit-profile-form");
+      const profileCircle = document.querySelector(".profile-circle");
+      const imageUpload = document.getElementById("image-upload");
+      const profileImage = document.getElementById("profile-image");
+      const uploadIcon = document.getElementById("upload-icon");
+
+      // Display Edit Profile Modal
+      editBtn.addEventListener("click", () => {
+        editModal.style.display = "block";
+      });
+
+      // Display Registered Events Modal
+      eventsBtn.addEventListener("click", () => {
+        eventsModal.style.display = "block";
+      });
+
+      // Close Modals
+      closeBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          editModal.style.display = "none";
+          eventsModal.style.display = "none";
+        });
+      });
+
+      // Close Modal when clicking outside
+      window.addEventListener("click", (event) => {
+        if (event.target === editModal) {
+          editModal.style.display = "none";
+        }
+        if (event.target === eventsModal) {
+          eventsModal.style.display = "none";
+        }
+      });
+
+      // Handle Profile Edit Form Submission
+      editForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        // Get form values
+        const username = document.getElementById("username").value;
+        const email = document.getElementById("email").value;
+        const experiences = document.getElementById("experiences").value;
+
+        // Update profile display
+        document.getElementById("username-display").textContent = username;
+        document.getElementById("email-display").textContent = email;
+
+        // Update experiences with line breaks
+        const experiencesHtml = experiences
+          .split("\n")
+          .map((exp) => `<span>${exp}</span>`)
+          .join("<br>");
+        document.getElementById("experiences-display").innerHTML =
+          experiencesHtml;
+
+        // Close modal
+        editModal.style.display = "none";
+
+        // Show success message
+        alert("Profile updated successfully!");
+      });
+
+      // Handle Profile Image Upload
+      profileCircle.addEventListener("click", () => {
+        imageUpload.click();
+      });
+
+      imageUpload.addEventListener("change", (e) => {
+        if (e.target.files && e.target.files[0]) {
+          const reader = new FileReader();
+
+          reader.onload = (event) => {
+            profileImage.src = event.target.result;
+            profileImage.classList.remove("hidden");
+            uploadIcon.classList.add("hidden");
+          };
+
+          reader.readAsDataURL(e.target.files[0]);
+        }
+      });
+    </script>
+  </body>
+</html>
