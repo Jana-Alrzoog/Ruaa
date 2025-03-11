@@ -135,8 +135,20 @@ body {
   width: 320px;
     overflow: hidden;
   background-color: #fff;
+   transition: background-color 0.3s ease, transform 0.2s ease;
+    
+	
+    
+   
   
 }
+
+
+.event-card:hover {
+    background-color: #d3d3d3;
+    transform: scale(1.03);
+}
+
 
 .event-image {
   width: 100%;
@@ -174,6 +186,8 @@ body {
     cursor: pointer;
     background-color: #8940d3;
     transition: 0.3s;
+	 z-index: 1000; 
+    position: relative; /
 }
 
 .register-btn:hover {
